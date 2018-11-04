@@ -1,21 +1,31 @@
 #-*-coding: utf-8-*-
 from tkinter import *
-import math
+import subprocess
+
+ 
 
 global game
-game = 0
+game1 = 0
+game2 = 0
+game3 = 0
+game4 = 0
 
 def game1():
-    game = 1
+    returnVal = subprocess.call(['./game1.sh'])
+    #print(returnVal)
+    if returnVal == 0:
+        print("Game1 done!")
+        game1=1
      
 def game2():
-    game = 2
+    #print(returnVal)
+    game2 = 0
 
 def game3():
-    game = 3
+    game3 = 0
 
 def game4():
-    game = 4
+    game4 = 0
 
 
 ### Main ###
@@ -29,7 +39,7 @@ master.geometry()
 #self.e.focus_set() #Sets focus on the input text area
 
 #Game1: 
-Button(master,text="Game 1",width=10,height=8,command=lambda:game1()).grid(row=0, column=0,columnspan=1)
+buttonGame1 = Button(master,text="Game 1", bg='red', width=10,height=8,command=lambda:game1()).grid(row=0, column=0,columnspan=1)
 textGame1 = Label(master, text="done",height=5, width=5).grid(row=1, column=0)
 
 #Game2:
