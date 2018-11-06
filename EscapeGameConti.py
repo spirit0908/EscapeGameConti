@@ -43,7 +43,7 @@ buttonGame1 = Button(master,text="Game 1", bg='red', width=10,height=8,command=l
 textGame1 = Label(master, text="done",height=5, width=5).grid(row=1, column=0)
 
 #Game2:
-Button(master,text='Game 2',width=10,height=8,command=lambda:game2()).grid(row=0, column=1)
+Button(master,text='Game 2', bg='green', width=10,height=8,command=lambda:game2()).grid(row=0, column=1)
 textGame2 = Label(master, text="done").grid(row=1, column=1)
 
 #Game3:
@@ -56,7 +56,6 @@ textGame4 = Label(master, text="done").grid(row=3, column=1)
 
 #Timer:
 textTime = Label(master, text="Time remaining: 22 min").grid(row=4, column=0)
-
 
 master.mainloop()
 
