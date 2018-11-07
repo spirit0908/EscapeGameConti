@@ -7,6 +7,8 @@ import subprocess
 
 global CardState
 global CardID
+global cardNum
+global tagListe
 
 #Create an instance of the PN532 class
 pn532 = PN532.PN532("/dev/ttyAMA0", 115200)
@@ -20,12 +22,13 @@ pn532.SAM_configuration()
 # Get the firmware version from the chip and print(it out.)
 ic, ver, rev, support = pn532.get_firmware_version()
 print('Found PN532 with firmware version: {0}.{1}'.format(ver, rev))
-
-print('Waiting for MiFare card...')
+#print('Waiting for MiFare card...')
 
 CardState = "none"
+cardNum = 0
+tagListe = [0, 0, 0, 0]
 
-while True:
+while cardNum < 4:
     global CardState
     # Check if a card is available to read.
 #    uid = pn532.read_passive_target()
@@ -41,7 +44,7 @@ while True:
     elif CardState == "read":
         #Wait to read a card
         uid = pn532.read_passive_target()
-	
+
         if uid == "no_card":
 #	    print("waiting for card...{}".format(uid))
             CardState = "read"
@@ -51,9 +54,9 @@ while True:
 
     elif CardState == "card_detected":
         print("card detected: {}".format(format(binascii.hexlify(uid))))
-        CardID = uid[0]
-        CardID = CardID<<8 + uid[1]
-        print("card detected: byte0 {}".format(CardID))
+#        CardID = format(binascii.hexlify(uid))
+        CardID = int(binascii.hexlify(uid), 16)
+#        print("card detected: DEBUG: {}".format(CardID))
         #Wait to remove card
 #        uid = pn532.read_passive_target()
         print("waiting card is removed") 
@@ -63,10 +66,25 @@ while True:
         uid = pn532.read_passive_target()
  
         if uid == "no_card":
-            print("card removed.")
+#            print("card removed.")
             CardState = "init"
             #Alternative: exit script and return tag ID
-            sys.exit(CardID)
+            if CardID == int("47048641", 16):
+                print("Master key detected {}".format(int(CardID)))
+                sys.exit(CardID)
+            else:
+                for x in range(0, 3):
+                    print("comparing id {} with liste[{}] {}".format(CardID,x,tagListe[x]))
+                    if CardID == tagListe[x] :
+                        print("Error: You can't use the same tag twice!")
+                        print("Exit program...")
+                        sys.exit(CardID)
+                tagListe[cardNum] = CardID
+                cardNum = cardNum + 1
+#                print("cardnum: {}".format(cardNum))
+#                print("card number {}".format(CardID))   
+#                sys.exit(CardID)
+                
     else:
         CardState = "init"
 
