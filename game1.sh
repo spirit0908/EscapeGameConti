@@ -1,5 +1,47 @@
 #!/bin/bash
 
+function testMenu
+{
+    echo "Maintenance menu:"
+    echo "1. Lock/Unlock Santa's office - locked"
+    echo "2. Lock/Unlock Secret box     - locked"
+    echo "3. Run password reset sequence"
+    echo "4. Exit"
+    read -p 'Select an option: ' string
+}
+
+function showMenu
+{
+    echo "Menu:"
+    echo "1. Show current access status"
+    echo "2. Access control"
+    echo "3. Lights control"
+    echo "4. Exit"
+    read -p 'Select an option: ' menu_option
+}
+
+function showSubMenu_1
+{
+    echo "Current acces status"
+    echo "1. Santa's Office   : locked"
+    echo "2. Santa's workshop : locked"
+    echo "3. Secret box       : locked"
+    echo "4. Exit"
+    read -p 'Select an option to unlock: ' menu1_option
+}
+
+function showSubMenu_2
+{
+    echo "Account parameters"
+    echo "1. Password update"
+    echo "2. Password reset"
+    echo "3. Create a new account"
+    echo "4. Exit"
+    read -p 'Select an option: ' menu2_option
+}
+
+
+
 #Question 1
 echo "Entrez votre identifiant"
 read -p 'id: ' string
