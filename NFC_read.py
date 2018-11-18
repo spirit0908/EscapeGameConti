@@ -28,6 +28,11 @@ CardState = "none"
 cardNum = 0
 tagListe = [0, 0, 0, 0]
 
+taglistFile = open("input_badge.txt", "w")
+taglistFile.write("")
+taglistFile.close()
+
+
 while cardNum < 4:
     global CardState
     # Check if a card is available to read.
@@ -54,11 +59,9 @@ while cardNum < 4:
 
     elif CardState == "card_detected":
         print("card detected: {}".format(format(binascii.hexlify(uid))))
-#        CardID = format(binascii.hexlify(uid))
+        subprocess.call("./bip.sh", shell=True)
         CardID = int(binascii.hexlify(uid), 16)
-#        print("card detected: DEBUG: {}".format(CardID))
         #Wait to remove card
-#        uid = pn532.read_passive_target()
         print("waiting card is removed") 
         CardState = "waiting_remove"
 
@@ -69,18 +72,18 @@ while cardNum < 4:
 #            print("card removed.")
             CardState = "init"
             #Alternative: exit script and return tag ID
-            if CardID == int("47048641", 16):
-                print("Master key detected {}".format(int(CardID)))
-                sys.exit(CardID)
+            if CardID == int("0xd3615d59", 16):
+                print("Master key detected {}".format(CardID))
+                print("Unlock")
+                subprocess.call("./bip.sh", shell=True)
+                subprocess.call("./bip.sh", shell=True)
+                subprocess.call("./unlock.sh", shell=True)
             else:
-                for x in range(0, 3):
-                    print("comparing id {} with liste[{}] {}".format(CardID,x,tagListe[x]))
-                    if CardID == tagListe[x] :
-                        print("Error: You can't use the same tag twice!")
-                        print("Exit program...")
-                        sys.exit(CardID)
-                tagListe[cardNum] = CardID
-                cardNum = cardNum + 1
+                #record tag ID
+                print("write tag id")
+                taglistFile = open("input_badge.txt", "a")
+                taglistFile.write("badge-{}\n".format(hex(CardID)))
+                taglistFile.close()
 #                print("cardnum: {}".format(cardNum))
 #                print("card number {}".format(CardID))   
 #                sys.exit(CardID)
