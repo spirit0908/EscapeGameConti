@@ -53,7 +53,7 @@ class simplemaster_g4_tk(Tk):
     def finish(self):
         self.lempty = Label(self, text="", state='disabled')
         self.lempty.grid(row=3, column=3, columnspan=3)
-        self.label = Label(self, text="Well done !", bg='white', fg='red', width=25, relief='groove')
+        self.label = Label(self, text="Well done !", bg='white', fg='red', width=25, relief='groove', font=self.font)
         self.label.grid(row=4, column=3, columnspan=3)
         f = open("init.txt", "a")
         f.write("finish_game4")
@@ -99,6 +99,8 @@ class simplemaster_g4_tk(Tk):
     def initialize(self):
         self.grid()
         self.clear()
+
+        self.font = "-family {Helvetica} -size -20 -weight bold"
         
         self.can1 = Canvas(self, width=150, height=120, bg='red')
         txt1 = self.can1.create_text(75, 60, text='', fill='black')
