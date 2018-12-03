@@ -1,1 +1,1 @@
-./radioEmission 7 123456 1 on
+sudo ./radioEmission 7 123456 1 on
