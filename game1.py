@@ -63,7 +63,7 @@ def answer_step3(master_g1, entry3):
         label6.grid(row=6, column=0, columnspan=3)
 
 def step4(master_g1):
-    label7 = Label(master_g1, text="What is you favorite dish ?", font=Font_lbl)
+    label7 = Label(master_g1, text="What is you favorite food ?", font=Font_lbl)
     label7.grid(row=7, column=0)
     entry4 = Entry(master_g1, width=25, font=Font_lbl)
     entry4.grid(row=7, column=1, columnspan=3)

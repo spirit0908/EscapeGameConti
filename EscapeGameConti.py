@@ -26,6 +26,7 @@ class simpleapp_tk(Tk):
         self.lfinsih = Label(self, text="Well done !", state="normal",fg='red', bg='white',relief="groove",width=25,font=self.font).grid(row=8, column=1, columnspan=4)
         self.bfinish = Button(self, text="Quit", command=self.destroy, font=self.font)
         self.bfinish.grid(row=10, column=3)
+        subprocess.call("./unlock.sh",shell=True)
         subprocess.call("./music.sh",shell=True)
         
     def loose(self):
