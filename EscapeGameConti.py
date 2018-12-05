@@ -8,7 +8,7 @@ import subprocess
 
 remaining_time = 2401 #40min
 debug = 'true'
-pwd = 'toto'#'SoftwarePlatform'
+pwd = 'SoftwarePlatform'
 
 class simpleapp_tk(Tk):
     def __init__(self,parent):

@@ -84,7 +84,7 @@ def answer_step4(master_g1, entry4):
 def game1_end(master_g1):
     label9 = Label(master_g1, text="Welcome Santa ! Good to see you again.", font=Font_lbl)
     label9.grid(row=8, column=0, columnspan=3)
-    label10 = Label(master_g1, text="Your new password is: SwoftwarePlatform", font=Font_lbl)
+    label10 = Label(master_g1, text="Your new password is: SoftwarePlatform", font=Font_lbl)
     label10.grid(row=9, column=0, columnspan=3)
     button5 = Button(master_g1,text="Finish", command=lambda:close(master_g1), font=Font_lbl).grid(row=10,column=1, columnspan=1)
 
